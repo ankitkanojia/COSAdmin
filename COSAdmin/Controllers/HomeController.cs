@@ -14,6 +14,8 @@ namespace COSAdmin.Controllers
     {
         DBEntities db = new DBEntities();
 
+        #region --> Coach Login
+
         public ActionResult Login()
         {
             return View();
@@ -72,6 +74,18 @@ namespace COSAdmin.Controllers
             }
 
         }
+
+        #endregion
+
+        #region --> Coach Registration
+
+        [HttpGet]
+        public ActionResult Registration()
+        {
+            return View();
+        }
+
+        #endregion
 
         private void SignInRemember(string userName, bool isPersistent = false)
         {
