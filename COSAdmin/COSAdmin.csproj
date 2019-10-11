@@ -141,6 +141,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Helpers\CookieHelper.cs" />
+    <Compile Include="Helpers\Utilities.cs" />
     <Compile Include="Models\CityMaster.cs">
       <DependentUpon>DBModel.tt</DependentUpon>
     </Compile>

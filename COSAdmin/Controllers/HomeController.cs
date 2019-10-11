@@ -85,6 +85,40 @@ namespace COSAdmin.Controllers
             return View();
         }
 
+        [HttpPost]
+        public ActionResult Registration(CoachMaster data, HttpPostedFileBase CoachCertificate)
+        {
+            try
+            {
+                using (db = new DBEntities())
+                {
+                    CoachMaster reg = new CoachMaster();
+                    if (CoachCertificate != null)
+                    {
+                        reg.CoachCertificate = Utilities.SaveImage(CoachCertificate, "~/Upload/CoachCertificate/");
+
+                    }
+                    reg.Mobile = data.Mobile;
+                    reg.Password = data.Password;
+                    reg.FirstName = data.FirstName;
+                    reg.LastName = data.LastName;
+                    reg.CityMasterID = data.CityMasterID;
+                    reg.ClubMasterID = data.ClubMasterID;
+                    reg.Address = data.Address;
+                    reg.CreatedDate = DateTime.Now;
+                    reg.TraineeCharge = data.TraineeCharge;
+                    reg.IsActive = true;
+                    db.CoachMasters.Add(reg);
+                    db.SaveChanges();
+                    return RedirectToAction("Login");
+                }
+            }
+            catch (Exception e)
+            {
+                throw;
+            }
+        }
+
         #endregion
 
         private void SignInRemember(string userName, bool isPersistent = false)

@@ -1,7 +1,144 @@
-﻿
+﻿@model CoachMaster
+
 @{
-    ViewBag.Title = "Registration";
+    Layout = null;
 }
+<!DOCTYPE html>
+<html>
+<head>
 
-<h2>Registration</h2>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+    <title>Registration</title>
+
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet">
+    <link href="~/Fonts/font-awesome/css/font-awesome.css" rel="stylesheet">
+
+    <link href="~/Content/animate.css" rel="stylesheet">
+    <link href="~/Content/style.css" rel="stylesheet">
+
+</head>
+
+<body class="gray-bg" style="background:url(../../Images/cos1.jpg)  no-repeat; background-size:cover">
+    @using (Html.BeginForm("Registration", "Home", FormMethod.Post, new { @id = "frmRegistration", enctype = "multipart/form-data" }))
+    {
+        <div class="loginColumns animated fadeInDown" style="padding:20px 20px 20px 20px">
+            <div class="row">
+                <div class="col-md-8">
+                    <div class="ibox-content">
+                        <div class="form-group text-center">
+                            <h4 class="title">Coach Registration</h4>
+                        </div>
+                        <div class="hr-line-solid"></div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label> Mobile </label>
+                                @Html.TextBox("Mobile", null, new { @class = "form-control", @placeholder = "Enter Mobile Number", @maxlength = "10" })
+                            </div>
+
+                            <div class="form-group">
+                                <label> Password </label>
+                                @Html.Password("Password", null, new { @class = "form-control", @placeholder = "Enter Your Password" })
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label> FirstName </label>
+                                @Html.TextBox("FirstName", null, new { @class = "form-control", @placeholder = "First Name" })
+                            </div>
+                            <div class="form-group">
+                                <label> LastName </label>
+                                @Html.TextBox("LastName", null, new { @class = "form-control", @placeholder = "Last Name" })
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label> Address </label>
+                                <textarea rows="2" class="form-control" name="Address" id="Address" placeholder="Enter your full address" cols="50"></textarea>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label> Trainee Charge </label>
+                                @Html.TextBoxFor(s => s.TraineeCharge, new { @class = "form-control", @placeholder = "Trainee Charge" })
+                            </div>
+                            <div class="form-group">
+                                <label> Select CityName </label>
+                                @Html.DropDownListFor(s => s.CityMasterID, COSAdmin.Helpers.Utilities.GetCity(), new { @class = "form-control" })
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>Select Certificate</label>
+                                <input class="form-control" type="file" name="CoachCertificate" id="CoachCertificate" />
+                            </div>
+
+                            <div class="form-group">
+                                <label> Select Club Service </label>
+                                @Html.DropDownListFor(s => s.ClubMasterID, COSAdmin.Helpers.Utilities.GetClubServices(), new { @class = "form-control" })
+                            </div>
+
+                        </div>
+
+                        <div class="col-md-12">
+                            <button type="submit" class="btn btn-primary block full-width m-b">Register</button>
+                        </div>
+                        <div class="clearfix"></div>
+
+                    </div>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+            <div class="row">
+                <div class="col-md-8 text-white text-center" style="font-size:16px;">
+                    <hr style="margin-top:8px; margin-bottom:8px;" />
+                    <b>
+                        Copyright &copy; 2016 | <a href="https://riowebs.com/" style="color:white">Riowebs</a>
+                    </b>
+                </div>
+            </div>
+        </div>
+    }
+    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
+    <script src="~/Scripts/plugins/validate/jquery.validate.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            //Code for after loading the page
+
+            jQuery.validator.addMethod("lettersonly", function (value, element) {
+                return this.optional(element) || /^[a-z]+$/i.test(value);
+            }, "Letters only please");
+
+
+            $("#frmRegistration").validate({
+                rules: {
+                    Mobile: {
+                        required: true,
+                        maxlength: '10',
+                        minlength: '10',
+                        number: true
+                    },
+                    Password: {
+                        required: true,
+                        minlength: '6',
+                    },
+                    FirstName: {
+                        required: true,
+                        lettersonly: true
+                    },
+                    LastName: {
+                        required: true,
+                        lettersonly: true
+                    },
+                    Address: {
+                        required: true
+                    }
+                }
+            });
+        });
+
+    </script>
+</body>
+
+</html>
