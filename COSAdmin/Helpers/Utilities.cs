@@ -21,5 +21,22 @@ namespace COSAdmin.Helpers
                 return string.Empty;
             }
         }
+
+        public static string GenerateRandomString(int Length)
+        {
+            try
+            {
+                const string chars = "0123456789";
+
+                var random = new Random();
+
+                return new string(Enumerable.Repeat(chars, Length)
+                  .Select(s => s[random.Next(s.Length)]).ToArray());
+            }
+            catch (Exception)
+            {
+                return string.Empty;
+            }
+        }
     }
 }

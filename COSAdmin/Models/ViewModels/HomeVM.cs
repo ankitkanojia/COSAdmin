@@ -14,4 +14,16 @@ namespace COSAdmin.Models.ViewModels
         public bool IsAdmin { get; set; }
 
     }
+
+    public class ResetPWDVM
+    {
+        public string UniqueCode { get; set; }
+
+        public string OTP { get; set; }
+
+        public string Password { get; set; }
+
+        public string Mobile { get; set; }
+
+    }
 }

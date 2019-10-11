@@ -3,6 +3,7 @@ using COSAdmin.Models;
 using COSAdmin.Models.ViewModels;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -173,10 +174,83 @@ namespace COSAdmin.Controllers
 
         #endregion
 
+        #region --> Reset Password 
+
         public ActionResult ResetPassword()
         {
-             return View();
+            ResetPWDVM resetPWDVM = new ResetPWDVM();
+
+            try
+            {
+
+                if (TempData["UniqueCode"] != null && TempData["Mobile"] != null)
+                {
+                    resetPWDVM.UniqueCode = TempData["UniqueCode"].ToString();
+                    resetPWDVM.Mobile = TempData["Mobile"].ToString();
+                }
+                else
+                {
+                    return RedirectToAction("ForgotPassword");
+                }
+
+                return View(resetPWDVM);
+            }
+            catch (Exception e)
+            {
+                throw;
+            }
+
         }
+
+        [HttpPost]
+        public ActionResult ResetPassword(ResetPWDVM data)
+        {
+
+            UserMaster userMaster = new UserMaster();
+
+
+            try
+            {
+                //Mobile Check
+                userMaster = db.UserMasters.Where(s => s.Mobile == data.Mobile).FirstOrDefault();
+
+                if (userMaster == null)
+                {
+                    //Mobile Number does not exists in our system
+                    return View();
+                }
+
+                //OTP Check
+                var OTPData = db.OTPs.Where(s => s.OTPCode == data.OTP && s.UniqueCode == data.UniqueCode).FirstOrDefault();
+
+                if (OTPData == null)
+                {
+                    //Invalid OTP / Wrong OTP
+                    return View();
+                }
+
+                if (OTPData.CreatedDate.AddMinutes(15) < DateTime.Now)
+                {
+                    //OTP Expired
+                    return View();
+                }
+
+                //Reset Password
+                userMaster.Password = data.Password;
+                db.Entry(userMaster).State = EntityState.Modified;
+                db.SaveChanges();
+
+                return RedirectToAction("Login", "Home");
+            }
+            catch
+            {
+                throw;
+            }
+
+
+        }
+
+        #endregion
 
         private void SignInRemember(string userName, bool isPersistent = false)
         {
