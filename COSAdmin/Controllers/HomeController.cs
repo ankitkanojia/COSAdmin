@@ -121,10 +121,57 @@ namespace COSAdmin.Controllers
 
         #endregion
 
+        #region --> Forgot Password
+
         public ActionResult ForgotPassword()
         {
             return View();
         }
+
+        [HttpPost]
+        public ActionResult ForgotPassword(string Mobile)
+        {
+            try
+            {
+                using (db = new DBEntities())
+                {
+                    //Validate Mobile Number
+                    var data = db.UserMasters.Where(s => s.Mobile == Mobile).FirstOrDefault();
+
+                    if (data == null)
+                    {
+                        //Mobile Number does not exists in our system
+                        return View();
+                    }
+
+                    //Generate OTP
+                    string OTPCode = Utilities.GenerateRandomString(6);
+                    string UniqueCode = Utilities.GenerateRandomString(26);
+
+                    //Save OTP
+                    OTP oTP = new OTP();
+                    oTP.CreatedDate = DateTime.Now;
+                    oTP.OTPCode = OTPCode;
+                    oTP.UniqueCode = UniqueCode;
+                    db.OTPs.Add(oTP);
+                    db.SaveChanges();
+
+                    //Send OTP
+                    EmailAndSMS.SendOTPSMS(Mobile, OTPCode);
+
+                    TempData["UniqueCode"] = UniqueCode;
+                    TempData["Mobile"] = Mobile;
+                    return RedirectToAction("ResetPassword", "Home");
+                }
+            }
+            catch
+            {
+                throw;
+            }
+
+        }
+
+        #endregion
 
         private void SignInRemember(string userName, bool isPersistent = false)
         {
