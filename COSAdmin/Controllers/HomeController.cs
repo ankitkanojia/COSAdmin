@@ -121,6 +121,11 @@ namespace COSAdmin.Controllers
 
         #endregion
 
+        public ActionResult ForgotPassword()
+        {
+            return View();
+        }
+
         private void SignInRemember(string userName, bool isPersistent = false)
         {
             // Clear any lingering authencation data
