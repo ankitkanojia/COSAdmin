@@ -24,75 +24,75 @@
 <body class="gray-bg" style="background:url(../../Images/cos1.jpg)  no-repeat; background-size:cover">
     @using (Html.BeginForm("Login", "Home", FormMethod.Post, new { @id = "frmLogin" }))
     {
-        <div class="loginColumns animated fadeInDown">
-            <div class="row">
+    <div class="loginColumns animated fadeInDown">
+        <div class="row">
 
-                <div class="col-md-7">
-                    <div class="ibox-content">
-
-
-
-                        <div class="form-group text-center">
-                            <h4 class="title">Welcome to Club Organisation System</h4>
-                        </div>
-
-                        <br />
-
-                        <div class="form-group">
-                            @Html.TextBoxFor(s => s.Mobile, new { @class = "form-control", @placeholder = "Mobile", @maxlength = "10" })
-                        </div>
-                        <div class="form-group">
-                            @Html.PasswordFor(s => s.Password, new { @class = "form-control", @placeholder = "Password" })
-                        </div>
-                        <button type="submit" class="btn btn-primary block full-width m-b">Login</button>
-
-                        <div class="form-group">
-
-
-                            <div class="radio radio-info radio-inline">
-                                @Html.RadioButtonFor(s => s.IsAdmin, true, new { @id = "inlineRadio1", @checked = true })
-                                <label for="inlineRadio1"> Admin </label>
-                            </div>
-                            <div class="radio radio-info radio-inline">
-                                @Html.RadioButtonFor(s => s.IsAdmin, false, new { @id = "inlineRadio2" })
-                                <label for="inlineRadio1"> Coach </label>
-                            </div>
-                        </div>
+            <div class="col-md-7">
+                <div class="ibox-content">
 
 
 
-
-                        <a href="@Url.Action("ForgotPassword", "Home")">
-                            <small>Forgot password?</small>
-                        </a>
-
-                        <p class="text-muted text-center">
-                            <small>Do not have an account?</small>
-                        </p>
-                        <a class="btn btn-sm btn-white btn-block" href="@Url.Action("Registration", "Home")">Create an account</a>
-
-
+                    <div class="form-group text-center">
+                        <h4 class="title">Welcome to Club Organisation System</h4>
                     </div>
+
+                    <br />
+
+                    <div class="form-group">
+                        @Html.TextBoxFor(s => s.Mobile, new { @class = "form-control", @placeholder = "Mobile", @maxlength = "10" })
+                    </div>
+                    <div class="form-group">
+                        @Html.PasswordFor(s => s.Password, new { @class = "form-control", @placeholder = "Password" })
+                    </div>
+                    <button type="submit" class="btn btn-primary block full-width m-b">Login</button>
+
+                    <div class="form-group">
+
+
+                        <div class="radio radio-info radio-inline">
+                            @Html.RadioButtonFor(s => s.IsAdmin, true, new { @id = "inlineRadio1", @checked = true })
+                            <label for="inlineRadio1"> Admin </label>
+                        </div>
+                        <div class="radio radio-info radio-inline">
+                            @Html.RadioButtonFor(s => s.IsAdmin, false, new { @id = "inlineRadio2" })
+                            <label for="inlineRadio1"> Coach </label>
+                        </div>
+                    </div>
+
+
+
+
+                    <a href="@Url.Action(" ForgotPassword", "Home" )">
+                        <small>Forgot password?</small>
+                    </a>
+
+                    <p class="text-muted text-center">
+                        <small>Do not have an account?</small>
+                    </p>
+                    <a class="btn btn-sm btn-white btn-block" href="@Url.Action(" Registration", "Home" )">Create an account</a>
+
+
                 </div>
+            </div>
 
-                <div class="col-md-5">
+            <div class="col-md-5">
 
-
-                </div>
 
             </div>
-            <div class="row">
-                <div class="col-md-6 text-white text-center" style="font-size:16px;">
-                    <hr />
-                    <b>
-                        Copyright &copy; 2016 | <a href="https://riowebs.com/"  style="color:white">Riowebs</a>
-                    </b>
-                </div>
-                <div class="col-md-6 text-right">
 
-                </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6 text-white text-center" style="font-size:16px;">
+                <hr />
+                <b>
+                    Copyright &copy; 2016 | <a href="https://riowebs.com/" style="color:white">Riowebs</a>
+                </b>
+            </div>
+            <div class="col-md-6 text-right">
+
             </div>
         </div>
+    </div>
 
 
     }
