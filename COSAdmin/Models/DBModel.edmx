@@ -1,0 +1,657 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="DBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="CityMasters">
+          <Key>
+            <PropertyRef Name="CityMasterID" />
+          </Key>
+          <Property Name="CityMasterID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CityName" Type="nvarchar" MaxLength="50" />
+          <Property Name="StateMasterID" Type="bigint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ClubMasters">
+          <Key>
+            <PropertyRef Name="ClubMasterID" />
+          </Key>
+          <Property Name="ClubMasterID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ClubName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+          <Property Name="UpdatedDate" Type="datetime" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
+          <Property Name="ClubImage" Type="nvarchar(max)" />
+          <Property Name="Description" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="ClubServices">
+          <Key>
+            <PropertyRef Name="ClubServiceID" />
+          </Key>
+          <Property Name="ClubServiceID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ServiceName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="ServiceCategoryID" Type="bigint" Nullable="false" />
+          <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+          <Property Name="UpdatedDate" Type="datetime" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
+          <Property Name="IsPaid" Type="bit" Nullable="false" />
+          <Property Name="ClubMasterID" Type="bigint" />
+        </EntityType>
+        <EntityType Name="CoachMasters">
+          <Key>
+            <PropertyRef Name="CouchMasterID" />
+          </Key>
+          <Property Name="CouchMasterID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TraineeCharge" Type="decimal" Precision="9" Scale="2" />
+          <Property Name="FirstName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="LastName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="CityMasterID" Type="bigint" Nullable="false" />
+          <Property Name="ClubMasterID" Type="bigint" />
+          <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+          <Property Name="UpdatedDtae" Type="datetime" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
+          <Property Name="Address" Type="nvarchar" MaxLength="50" />
+          <Property Name="PinCode" Type="nvarchar" MaxLength="6" />
+          <Property Name="Email" Type="nvarchar" MaxLength="50" />
+          <Property Name="Mobile" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="Password" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="CoachCertificate" Type="nvarchar(max)" />
+          <Property Name="Experience" Type="decimal" Precision="5" Scale="2" />
+        </EntityType>
+        <EntityType Name="CoachSchedules">
+          <Key>
+            <PropertyRef Name="CoachScheduleID" />
+          </Key>
+          <Property Name="CoachScheduleID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CoachMasterID" Type="bigint" Nullable="false" />
+          <Property Name="StartTime" Type="time" Precision="7" Nullable="false" />
+          <Property Name="EndTime" Type="time" Precision="7" Nullable="false" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
+          <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+          <Property Name="UpdatedDate" Type="datetime" />
+        </EntityType>
+        <EntityType Name="CoachServices">
+          <Key>
+            <PropertyRef Name="CoachServiceID" />
+          </Key>
+          <Property Name="CoachServiceID" Type="bigint" Nullable="false" />
+          <Property Name="CoachService1" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="CoachMasterID" Type="bigint" Nullable="false" />
+          <Property Name="ServiceCategoryID" Type="bigint" Nullable="false" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
+          <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Enquiries">
+          <Key>
+            <PropertyRef Name="EnquiryId" />
+          </Key>
+          <Property Name="EnquiryId" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Description" Type="nvarchar" MaxLength="500" Nullable="false" />
+          <Property Name="Email" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="IsResponce" Type="bit" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Feedbacks">
+          <Key>
+            <PropertyRef Name="FeedbackID" />
+          </Key>
+          <Property Name="FeedbackID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Description" Type="nvarchar" MaxLength="500" Nullable="false" />
+          <Property Name="Email" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="ProductID" Type="bigint" Nullable="false" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="GallaryMasters">
+          <Key>
+            <PropertyRef Name="GallaryMasterID" />
+          </Key>
+          <Property Name="GallaryMasterID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Image" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="ClubServiceID" Type="bigint" Nullable="false" />
+          <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+          <Property Name="UpdatedDate" Type="datetime" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="OTPs">
+          <Key>
+            <PropertyRef Name="OTPID" />
+          </Key>
+          <Property Name="OTPID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UniqueCode" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="OTPCode" Type="nvarchar" MaxLength="6" Nullable="false" />
+          <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PaymentTypes">
+          <Key>
+            <PropertyRef Name="PaymentTypeID" />
+          </Key>
+          <Property Name="PaymentTypeID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Roles">
+          <Key>
+            <PropertyRef Name="RoleID" />
+          </Key>
+          <Property Name="RoleID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="RoleName" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ServiceCategories">
+          <Key>
+            <PropertyRef Name="ServiceCategoryID" />
+          </Key>
+          <Property Name="ServiceCategoryID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CategoryType" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+          <Property Name="UpdatedDate" Type="datetime" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="StateMasters">
+          <Key>
+            <PropertyRef Name="StateMasterID" />
+          </Key>
+          <Property Name="StateMasterID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="StateName" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="UserMasters">
+          <Key>
+            <PropertyRef Name="UserMasterID" />
+          </Key>
+          <Property Name="UserMasterID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Mobile" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Password" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="DOB" Type="datetime" Nullable="false" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
+          <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+          <Property Name="UpdatedDate" Type="datetime" />
+          <Property Name="Profile" Type="nvarchar(max)" />
+          <Property Name="Address" Type="nvarchar" MaxLength="500" />
+          <Property Name="Email" Type="nvarchar" MaxLength="50" />
+          <Property Name="RoleID" Type="bigint" Nullable="false" />
+          <Property Name="IsPaid" Type="bit" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_CoachService_CoachService">
+          <End Role="ServiceCategories" Type="Self.ServiceCategories" Multiplicity="1" />
+          <End Role="CoachServices" Type="Self.CoachServices" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="ServiceCategories">
+              <PropertyRef Name="ServiceCategoryID" />
+            </Principal>
+            <Dependent Role="CoachServices">
+              <PropertyRef Name="CoachServiceID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StateMaster">
+          <End Role="StateMasters" Type="Self.StateMasters" Multiplicity="1" />
+          <End Role="CityMasters" Type="Self.CityMasters" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="StateMasters">
+              <PropertyRef Name="StateMasterID" />
+            </Principal>
+            <Dependent Role="CityMasters">
+              <PropertyRef Name="CityMasterID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="DBModelStoreContainer">
+          <EntitySet Name="CityMasters" EntityType="Self.CityMasters" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ClubMasters" EntityType="Self.ClubMasters" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ClubServices" EntityType="Self.ClubServices" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CoachMasters" EntityType="Self.CoachMasters" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CoachSchedules" EntityType="Self.CoachSchedules" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CoachServices" EntityType="Self.CoachServices" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Enquiries" EntityType="Self.Enquiries" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Feedbacks" EntityType="Self.Feedbacks" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="GallaryMasters" EntityType="Self.GallaryMasters" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="OTPs" EntityType="Self.OTPs" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PaymentTypes" EntityType="Self.PaymentTypes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Roles" EntityType="Self.Roles" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ServiceCategories" EntityType="Self.ServiceCategories" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="StateMasters" EntityType="Self.StateMasters" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UserMasters" EntityType="Self.UserMasters" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_CoachService_CoachService" Association="Self.FK_CoachService_CoachService">
+            <End Role="ServiceCategories" EntitySet="ServiceCategories" />
+            <End Role="CoachServices" EntitySet="CoachServices" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StateMaster" Association="Self.FK_StateMaster">
+            <End Role="StateMasters" EntitySet="StateMasters" />
+            <End Role="CityMasters" EntitySet="CityMasters" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="DBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="CityMaster">
+          <Key>
+            <PropertyRef Name="CityMasterID" />
+          </Key>
+          <Property Name="CityMasterID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CityName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="StateMasterID" Type="Int64" Nullable="false" />
+          <NavigationProperty Name="StateMaster" Relationship="Self.FK_StateMaster" FromRole="CityMasters" ToRole="StateMasters" />
+        </EntityType>
+        <EntityType Name="ClubMaster">
+          <Key>
+            <PropertyRef Name="ClubMasterID" />
+          </Key>
+          <Property Name="ClubMasterID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ClubName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="UpdatedDate" Type="DateTime" Precision="3" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+          <Property Name="ClubImage" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="ClubService">
+          <Key>
+            <PropertyRef Name="ClubServiceID" />
+          </Key>
+          <Property Name="ClubServiceID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ServiceName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ServiceCategoryID" Type="Int64" Nullable="false" />
+          <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="UpdatedDate" Type="DateTime" Precision="3" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+          <Property Name="IsPaid" Type="Boolean" Nullable="false" />
+          <Property Name="ClubMasterID" Type="Int64" />
+        </EntityType>
+        <EntityType Name="CoachMaster">
+          <Key>
+            <PropertyRef Name="CouchMasterID" />
+          </Key>
+          <Property Name="CouchMasterID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TraineeCharge" Type="Decimal" Precision="9" Scale="2" />
+          <Property Name="FirstName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="LastName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="CityMasterID" Type="Int64" Nullable="false" />
+          <Property Name="ClubMasterID" Type="Int64" />
+          <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="UpdatedDtae" Type="DateTime" Precision="3" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+          <Property Name="Address" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="PinCode" Type="String" MaxLength="6" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Mobile" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="CoachCertificate" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Experience" Type="Decimal" Precision="5" Scale="2" />
+        </EntityType>
+        <EntityType Name="CoachSchedule">
+          <Key>
+            <PropertyRef Name="CoachScheduleID" />
+          </Key>
+          <Property Name="CoachScheduleID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CoachMasterID" Type="Int64" Nullable="false" />
+          <Property Name="StartTime" Type="Time" Nullable="false" Precision="7" />
+          <Property Name="EndTime" Type="Time" Nullable="false" Precision="7" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+          <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="UpdatedDate" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="CoachService">
+          <Key>
+            <PropertyRef Name="CoachServiceID" />
+          </Key>
+          <Property Name="CoachServiceID" Type="Int64" Nullable="false" />
+          <Property Name="CoachService1" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="CoachMasterID" Type="Int64" Nullable="false" />
+          <Property Name="ServiceCategoryID" Type="Int64" Nullable="false" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+          <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="ServiceCategory" Relationship="Self.FK_CoachService_CoachService" FromRole="CoachServices" ToRole="ServiceCategories" />
+        </EntityType>
+        <EntityType Name="Enquiry">
+          <Key>
+            <PropertyRef Name="EnquiryId" />
+          </Key>
+          <Property Name="EnquiryId" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Description" Type="String" MaxLength="500" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="IsResponce" Type="Boolean" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Feedback">
+          <Key>
+            <PropertyRef Name="FeedbackID" />
+          </Key>
+          <Property Name="FeedbackID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Description" Type="String" MaxLength="500" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ProductID" Type="Int64" Nullable="false" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+        </EntityType>
+        <EntityType Name="GallaryMaster">
+          <Key>
+            <PropertyRef Name="GallaryMasterID" />
+          </Key>
+          <Property Name="GallaryMasterID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Image" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ClubServiceID" Type="Int64" Nullable="false" />
+          <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="UpdatedDate" Type="DateTime" Precision="3" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+        </EntityType>
+        <EntityType Name="OTP">
+          <Key>
+            <PropertyRef Name="OTPID" />
+          </Key>
+          <Property Name="OTPID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UniqueCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="OTPCode" Type="String" MaxLength="6" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+        </EntityType>
+        <EntityType Name="PaymentType">
+          <Key>
+            <PropertyRef Name="PaymentTypeID" />
+          </Key>
+          <Property Name="PaymentTypeID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Role">
+          <Key>
+            <PropertyRef Name="RoleID" />
+          </Key>
+          <Property Name="RoleID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="RoleName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ServiceCategory">
+          <Key>
+            <PropertyRef Name="ServiceCategoryID" />
+          </Key>
+          <Property Name="ServiceCategoryID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CategoryType" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="UpdatedDate" Type="DateTime" Precision="3" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="CoachService" Relationship="Self.FK_CoachService_CoachService" FromRole="ServiceCategories" ToRole="CoachServices" />
+        </EntityType>
+        <EntityType Name="StateMaster">
+          <Key>
+            <PropertyRef Name="StateMasterID" />
+          </Key>
+          <Property Name="StateMasterID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="StateName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="CityMaster" Relationship="Self.FK_StateMaster" FromRole="StateMasters" ToRole="CityMasters" />
+        </EntityType>
+        <EntityType Name="UserMaster">
+          <Key>
+            <PropertyRef Name="UserMasterID" />
+          </Key>
+          <Property Name="UserMasterID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Mobile" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="DOB" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+          <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="UpdatedDate" Type="DateTime" Precision="3" />
+          <Property Name="Profile" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Address" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="RoleID" Type="Int64" Nullable="false" />
+          <Property Name="IsPaid" Type="Boolean" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_StateMaster">
+          <End Role="StateMasters" Type="Self.StateMaster" Multiplicity="1" />
+          <End Role="CityMasters" Type="Self.CityMaster" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="StateMasters">
+              <PropertyRef Name="StateMasterID" />
+            </Principal>
+            <Dependent Role="CityMasters">
+              <PropertyRef Name="CityMasterID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CoachService_CoachService">
+          <End Role="ServiceCategories" Type="Self.ServiceCategory" Multiplicity="1" />
+          <End Role="CoachServices" Type="Self.CoachService" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="ServiceCategories">
+              <PropertyRef Name="ServiceCategoryID" />
+            </Principal>
+            <Dependent Role="CoachServices">
+              <PropertyRef Name="CoachServiceID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="DBEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="CityMasters" EntityType="Self.CityMaster" />
+          <EntitySet Name="ClubMasters" EntityType="Self.ClubMaster" />
+          <EntitySet Name="ClubServices" EntityType="Self.ClubService" />
+          <EntitySet Name="CoachMasters" EntityType="Self.CoachMaster" />
+          <EntitySet Name="CoachSchedules" EntityType="Self.CoachSchedule" />
+          <EntitySet Name="CoachServices" EntityType="Self.CoachService" />
+          <EntitySet Name="Enquiries" EntityType="Self.Enquiry" />
+          <EntitySet Name="Feedbacks" EntityType="Self.Feedback" />
+          <EntitySet Name="GallaryMasters" EntityType="Self.GallaryMaster" />
+          <EntitySet Name="OTPs" EntityType="Self.OTP" />
+          <EntitySet Name="PaymentTypes" EntityType="Self.PaymentType" />
+          <EntitySet Name="Roles" EntityType="Self.Role" />
+          <EntitySet Name="ServiceCategories" EntityType="Self.ServiceCategory" />
+          <EntitySet Name="StateMasters" EntityType="Self.StateMaster" />
+          <EntitySet Name="UserMasters" EntityType="Self.UserMaster" />
+          <AssociationSet Name="FK_StateMaster" Association="Self.FK_StateMaster">
+            <End Role="StateMasters" EntitySet="StateMasters" />
+            <End Role="CityMasters" EntitySet="CityMasters" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CoachService_CoachService" Association="Self.FK_CoachService_CoachService">
+            <End Role="ServiceCategories" EntitySet="ServiceCategories" />
+            <End Role="CoachServices" EntitySet="CoachServices" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="DBModelStoreContainer" CdmEntityContainer="DBEntities">
+          <EntitySetMapping Name="CityMasters">
+            <EntityTypeMapping TypeName="DBModel.CityMaster">
+              <MappingFragment StoreEntitySet="CityMasters">
+                <ScalarProperty Name="CityMasterID" ColumnName="CityMasterID" />
+                <ScalarProperty Name="CityName" ColumnName="CityName" />
+                <ScalarProperty Name="StateMasterID" ColumnName="StateMasterID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ClubMasters">
+            <EntityTypeMapping TypeName="DBModel.ClubMaster">
+              <MappingFragment StoreEntitySet="ClubMasters">
+                <ScalarProperty Name="ClubMasterID" ColumnName="ClubMasterID" />
+                <ScalarProperty Name="ClubName" ColumnName="ClubName" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="UpdatedDate" ColumnName="UpdatedDate" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="ClubImage" ColumnName="ClubImage" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ClubServices">
+            <EntityTypeMapping TypeName="DBModel.ClubService">
+              <MappingFragment StoreEntitySet="ClubServices">
+                <ScalarProperty Name="ClubServiceID" ColumnName="ClubServiceID" />
+                <ScalarProperty Name="ServiceName" ColumnName="ServiceName" />
+                <ScalarProperty Name="ServiceCategoryID" ColumnName="ServiceCategoryID" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="UpdatedDate" ColumnName="UpdatedDate" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="IsPaid" ColumnName="IsPaid" />
+                <ScalarProperty Name="ClubMasterID" ColumnName="ClubMasterID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CoachMasters">
+            <EntityTypeMapping TypeName="DBModel.CoachMaster">
+              <MappingFragment StoreEntitySet="CoachMasters">
+                <ScalarProperty Name="CouchMasterID" ColumnName="CouchMasterID" />
+                <ScalarProperty Name="TraineeCharge" ColumnName="TraineeCharge" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="CityMasterID" ColumnName="CityMasterID" />
+                <ScalarProperty Name="ClubMasterID" ColumnName="ClubMasterID" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="UpdatedDtae" ColumnName="UpdatedDtae" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="PinCode" ColumnName="PinCode" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Mobile" ColumnName="Mobile" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="CoachCertificate" ColumnName="CoachCertificate" />
+                <ScalarProperty Name="Experience" ColumnName="Experience" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CoachSchedules">
+            <EntityTypeMapping TypeName="DBModel.CoachSchedule">
+              <MappingFragment StoreEntitySet="CoachSchedules">
+                <ScalarProperty Name="CoachScheduleID" ColumnName="CoachScheduleID" />
+                <ScalarProperty Name="CoachMasterID" ColumnName="CoachMasterID" />
+                <ScalarProperty Name="StartTime" ColumnName="StartTime" />
+                <ScalarProperty Name="EndTime" ColumnName="EndTime" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="UpdatedDate" ColumnName="UpdatedDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CoachServices">
+            <EntityTypeMapping TypeName="DBModel.CoachService">
+              <MappingFragment StoreEntitySet="CoachServices">
+                <ScalarProperty Name="CoachServiceID" ColumnName="CoachServiceID" />
+                <ScalarProperty Name="CoachService1" ColumnName="CoachService1" />
+                <ScalarProperty Name="CoachMasterID" ColumnName="CoachMasterID" />
+                <ScalarProperty Name="ServiceCategoryID" ColumnName="ServiceCategoryID" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Enquiries">
+            <EntityTypeMapping TypeName="DBModel.Enquiry">
+              <MappingFragment StoreEntitySet="Enquiries">
+                <ScalarProperty Name="EnquiryId" ColumnName="EnquiryId" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="IsResponce" ColumnName="IsResponce" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Feedbacks">
+            <EntityTypeMapping TypeName="DBModel.Feedback">
+              <MappingFragment StoreEntitySet="Feedbacks">
+                <ScalarProperty Name="FeedbackID" ColumnName="FeedbackID" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="ProductID" ColumnName="ProductID" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="GallaryMasters">
+            <EntityTypeMapping TypeName="DBModel.GallaryMaster">
+              <MappingFragment StoreEntitySet="GallaryMasters">
+                <ScalarProperty Name="GallaryMasterID" ColumnName="GallaryMasterID" />
+                <ScalarProperty Name="Image" ColumnName="Image" />
+                <ScalarProperty Name="ClubServiceID" ColumnName="ClubServiceID" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="UpdatedDate" ColumnName="UpdatedDate" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="OTPs">
+            <EntityTypeMapping TypeName="DBModel.OTP">
+              <MappingFragment StoreEntitySet="OTPs">
+                <ScalarProperty Name="OTPID" ColumnName="OTPID" />
+                <ScalarProperty Name="UniqueCode" ColumnName="UniqueCode" />
+                <ScalarProperty Name="OTPCode" ColumnName="OTPCode" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PaymentTypes">
+            <EntityTypeMapping TypeName="DBModel.PaymentType">
+              <MappingFragment StoreEntitySet="PaymentTypes">
+                <ScalarProperty Name="PaymentTypeID" ColumnName="PaymentTypeID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Roles">
+            <EntityTypeMapping TypeName="DBModel.Role">
+              <MappingFragment StoreEntitySet="Roles">
+                <ScalarProperty Name="RoleID" ColumnName="RoleID" />
+                <ScalarProperty Name="RoleName" ColumnName="RoleName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ServiceCategories">
+            <EntityTypeMapping TypeName="DBModel.ServiceCategory">
+              <MappingFragment StoreEntitySet="ServiceCategories">
+                <ScalarProperty Name="ServiceCategoryID" ColumnName="ServiceCategoryID" />
+                <ScalarProperty Name="CategoryType" ColumnName="CategoryType" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="UpdatedDate" ColumnName="UpdatedDate" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="StateMasters">
+            <EntityTypeMapping TypeName="DBModel.StateMaster">
+              <MappingFragment StoreEntitySet="StateMasters">
+                <ScalarProperty Name="StateMasterID" ColumnName="StateMasterID" />
+                <ScalarProperty Name="StateName" ColumnName="StateName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserMasters">
+            <EntityTypeMapping TypeName="DBModel.UserMaster">
+              <MappingFragment StoreEntitySet="UserMasters">
+                <ScalarProperty Name="UserMasterID" ColumnName="UserMasterID" />
+                <ScalarProperty Name="Mobile" ColumnName="Mobile" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="DOB" ColumnName="DOB" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="UpdatedDate" ColumnName="UpdatedDate" />
+                <ScalarProperty Name="Profile" ColumnName="Profile" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="RoleID" ColumnName="RoleID" />
+                <ScalarProperty Name="IsPaid" ColumnName="IsPaid" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
