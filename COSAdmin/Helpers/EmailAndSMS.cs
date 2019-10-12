@@ -7,6 +7,7 @@ using System.Net.Mail;
 using System.Web;
 using System.Web.Configuration;
 
+
 namespace COSAdmin.Helpers
 {
     public class EmailAndSMS
@@ -18,6 +19,7 @@ namespace COSAdmin.Helpers
                 string username = "u450";
                 string msg_token = "4EwoLK";
                 string sender_id = "ANKIT";
+
 
                 string Message = "http://message.yukontechnologies.com/api/send_transactional_sms.php?username=" + username + "&msg_token=" + msg_token + "&sender_id=" + sender_id + "&message=Your One Time Password is " + OTP + "Team WebCayon" + "&mobile=" + mobile;
 
@@ -61,11 +63,15 @@ namespace COSAdmin.Helpers
                 oSmtpClient.Credentials = new System.Net.NetworkCredential(WebConfigurationManager.AppSettings["SMPTUserName"].ToString(), WebConfigurationManager.AppSettings["EmailPassword"].ToString());
                 oSmtpClient.Send(mail);
                 return true;
+
+
+
             }
             catch (Exception)
             {
                 return false;
             }
         }
+
     }
 }
