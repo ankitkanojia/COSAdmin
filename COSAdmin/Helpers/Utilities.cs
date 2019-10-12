@@ -94,6 +94,116 @@ namespace COSAdmin.Helpers
             return lstCategory;
         }
 
+        public static List<SelectListItem> GetServiceCategory()
+        {
+            List<SelectListItem> lstCategory = new List<SelectListItem>();
+
+            try
+            {
+                using (DBEntities db = new DBEntities())
+                {
+                    var data = db.ServiceCategories.Where(s => s.IsActive).ToList();
+
+                    lstCategory = data.Select(s => new SelectListItem
+                    {
+                        Text = s.CategoryType,
+                        Value = s.ServiceCategoryID.ToString()
+
+                    }).ToList();
+                }
+            }
+            catch
+            {
+                throw;
+            }
+
+            return lstCategory;
+        }
+
+        public static List<SelectListItem> GetCity()
+        {
+            List<SelectListItem> lstCity = new List<SelectListItem>();
+
+            try
+            {
+                using (DBEntities db = new DBEntities())
+                {
+                    var data = db.CityMasters.ToList();
+
+                    lstCity = data.Select(s => new SelectListItem
+                    {
+                        Text = s.CityName,
+                        Value = s.CityMasterID.ToString()
+
+                    }).ToList();
+                }
+            }
+            catch
+            {
+                throw;
+            }
+
+            return lstCity;
+        }
+
+        public static List<SelectListItem> GetClubName()
+        {
+            List<SelectListItem> lstClubName = new List<SelectListItem>();
+
+            try
+            {
+                using (DBEntities db = new DBEntities())
+                {
+                    var data = db.ClubMasters.Where(s => s.IsActive).ToList();
+
+                    lstClubName = data.Select(s => new SelectListItem
+                    {
+                        Text = s.ClubName,
+                        Value = s.ClubMasterID.ToString()
+
+                    }).ToList();
+                }
+            }
+            catch
+            {
+                throw;
+            }
+
+            return lstClubName;
+        }
+
+        public static List<SelectListItem> GetServiceCategoryList()
+        {
+            List<SelectListItem> lstCategory = new List<SelectListItem>();
+
+            try
+            {
+                using (DBEntities db = new DBEntities())
+                {
+                    var data = db.ServiceCategories.Where(s => s.IsActive).ToList();
+                    SelectListItem single = new SelectListItem();
+                    single.Value = "";
+                    single.Text = "Select service category";
+
+                    lstCategory.Add(single);
+
+
+                    lstCategory.AddRange(data.Select(s => new SelectListItem
+                    {
+                        Text = s.CategoryType,
+                        Value = s.ServiceCategoryID.ToString()
+
+                    }).ToList());
+                }
+            }
+            catch
+            {
+                throw;
+            }
+
+            return lstCategory;
+        }
+
         public static string SaveImage(HttpPostedFileBase file, string path)
         {
             try
