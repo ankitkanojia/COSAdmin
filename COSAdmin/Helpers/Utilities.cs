@@ -94,7 +94,6 @@ namespace COSAdmin.Helpers
             return lstCategory;
         }
 
-
         public static string SaveImage(HttpPostedFileBase file, string path)
         {
             try
@@ -125,5 +124,52 @@ namespace COSAdmin.Helpers
                 return string.Empty;
             }
         }
+
+        public static bool SendEmail(string EmailId, string subject, string Body, string from)
+        {
+            try
+            {
+                bool fSSL = true;
+
+                System.Web.Mail.MailMessage message = new System.Web.Mail.MailMessage();
+                message.Fields.Add("http://schemas.microsoft.com/cdo/configuration/smtpserver", "smtp.gmail.com");
+                message.Fields.Add("http://schemas.microsoft.com/cdo/configuration/sendusing", "2");
+                message.Fields.Add("http://schemas.microsoft.com/cdo/configuration/smtpserverport", "465");
+                if (fSSL)
+                    message.Fields.Add("http://schemas.microsoft.com/cdo/configuration/smtpusessl", "true");
+                message.Fields.Add("http://schemas.microsoft.com/cdo/configuration/smtpauthenticate", "1");
+                message.Fields.Add("http://schemas.microsoft.com/cdo/configuration/sendusername", "*******@gmail.com"); //add your email
+                message.Fields.Add("http://schemas.microsoft.com/cdo/configuration/sendpassword", "*******"); //add your key
+
+                //Preparing the message object....
+
+                if (string.IsNullOrWhiteSpace(from))
+                {
+
+                    message.From = "*******@gmail.com";
+                }
+                else
+                {
+                    message.From = from;
+                }
+
+
+                message.To = EmailId;
+                message.Subject = subject;
+                message.BodyFormat = System.Web.Mail.MailFormat.Html;
+
+
+                message.Body = Body;
+                System.Web.Mail.SmtpMail.SmtpServer = "smtp.gmail.com";
+                System.Web.Mail.SmtpMail.Send(message);
+                return true;
+
+            }
+            catch (Exception e)
+            {
+                return false;
+            }
+        }
+
     }
 }
