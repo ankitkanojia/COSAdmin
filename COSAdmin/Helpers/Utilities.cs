@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Net;
 using System.Web;
 using System.Web.Mvc;
 
@@ -215,6 +216,33 @@ namespace COSAdmin.Helpers
             catch
             {
                 return string.Empty;
+            }
+        }
+
+        public static bool SendOTPViaSMS(string mobile, string otp)
+        {
+            try
+            {
+                string username = "";
+                string msg_token = "";
+                string sender_id = "";
+
+                string URL = "http://message.yukontechnologies.com/api/send_transactional_sms.php?username=" + username + "&msg_token=" + msg_token + "&sender_id=" + sender_id + "&message=Your One Time Password is " + otp + ". From Team WebCayon" + "&mobile=" + mobile;
+
+                HttpWebRequest httpreq = (HttpWebRequest)WebRequest.Create(URL);
+
+                HttpWebResponse httpres = (HttpWebResponse)httpreq.GetResponse();
+                StreamReader sr = new StreamReader(httpres.GetResponseStream());
+                string results = sr.ReadToEnd();
+                //string finalresult = new string(results.Take(4).ToArray());
+                sr.Close();
+
+                return true;
+
+            }
+            catch
+            {
+                return false;
             }
         }
 
