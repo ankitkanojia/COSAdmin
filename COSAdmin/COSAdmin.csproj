@@ -140,6 +140,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Helpers\CheckAuthorization.cs" />
     <Compile Include="Helpers\CookieHelper.cs" />
     <Compile Include="Helpers\EmailAndSMS.cs" />
     <Compile Include="Helpers\Utilities.cs" />
