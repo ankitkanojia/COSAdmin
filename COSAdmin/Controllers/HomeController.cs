@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
+using System.Security.Principal;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Security;
@@ -248,6 +249,38 @@ namespace COSAdmin.Controllers
             }
 
 
+        }
+
+        #endregion
+
+        #region Sign out 
+
+        [HttpGet]
+        public ActionResult Logout()
+        {
+            try
+            {
+                // First we clean the authentication ticket like always
+                //required NameSpace: using System.Web.Security;
+                FormsAuthentication.SignOut();
+
+                // Second we clear the principal to ensure the user does not retain any authentication
+                //required NameSpace: using System.Security.Principal;
+                HttpContext.User = new GenericPrincipal(new GenericIdentity(string.Empty), null);
+
+                Session.Clear();
+                System.Web.HttpContext.Current.Session.RemoveAll();
+                CookieHelper.RemoveCookie("BackEndMasterID");
+
+
+                // Last we redirect to a controller/action that requires authentication to ensure a redirect takes place
+                // this clears the Request.IsAuthenticated flag since this triggers a new request
+                return RedirectToAction("Login");
+            }
+            catch
+            {
+                throw;
+            }
         }
 
         #endregion
