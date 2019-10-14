@@ -253,7 +253,32 @@ namespace COSAdmin.Controllers
 
         #endregion
 
-        #region Sign out 
+        #region --> Enquiry
+
+        public ActionResult ViewEnquiry()
+        {
+            List<Enquiry> enquiries = new List<Enquiry>();
+
+            try
+            {
+                using (db = new DBEntities())
+                {
+
+                    enquiries = db.Enquiries.ToList();
+                }
+            }
+            catch (Exception e)
+            {
+                throw;
+            }
+
+
+            return View(enquiries);
+        }
+
+        #endregion
+
+        #region --> Sign out 
 
         [HttpGet]
         public ActionResult Logout()
