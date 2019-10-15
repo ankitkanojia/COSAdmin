@@ -228,6 +228,26 @@ namespace COSAdmin.Controllers
             return View();
         }
 
+        public JsonResult deleteGallary(long GallaryMasterID = 0)
+        {
+            GallaryMaster gallaryMaster = new GallaryMaster();
+            try
+            {
+                using (db = new DBEntities())
+                {
+                    gallaryMaster = db.GallaryMasters.Where(s => s.GallaryMasterID == GallaryMasterID).FirstOrDefault();
+                    db.GallaryMasters.Remove(gallaryMaster);
+                    db.SaveChanges();
+                    return Json(true, JsonRequestBehavior.AllowGet);
+                }
+
+            }
+            catch (Exception e)
+            {
+                return Json(false, JsonRequestBehavior.AllowGet);
+            }
+        }
+
         #endregion
     }
 }
