@@ -141,7 +141,14 @@ namespace COSAdmin.Controllers
             {
                 using (db = new DBEntities())
                 {
-                    
+                    viewGallaryMasterVMs = db.GallaryMasters.Select(s => new ViewGallaryMasterVM
+                    {
+                        ServiceName = db.ClubServices.Find(s.ClubServiceID).ServiceName,
+                        Image = s.Image,
+                        CreatedDate = s.CreatedDate,
+                        IsActive = s.IsActive,
+                        GallaryMasterID = s.GallaryMasterID
+                    }).ToList();
                 }
             }
             catch (Exception e)
