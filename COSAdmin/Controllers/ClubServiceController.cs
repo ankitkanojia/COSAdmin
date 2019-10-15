@@ -33,5 +33,77 @@ namespace COSAdmin.Controllers
 
             return View(clubMasters);
         }
+
+        public ActionResult AddClub(long id = 0)
+        {
+            ClubMaster clubMaster = new ClubMaster();
+            try
+            {
+                using (db = new DBEntities())
+                {
+                    if (id > 0)
+                    {
+                        clubMaster = db.ClubMasters.Where(s => s.ClubMasterID == id).FirstOrDefault();
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                throw;
+            }
+            return View(clubMaster);
+        }
+
+        [HttpPost]
+        public ActionResult AddClub(ClubMaster data, HttpPostedFileBase ClubImage)
+        {
+            ClubMaster clubMaster = new ClubMaster();
+
+            try
+            {
+                using (db = new DBEntities())
+                {
+                    if (data.ClubMasterID > 0)
+                    {
+                        //Update HERE
+                        clubMaster = db.ClubMasters.Where(s => s.ClubMasterID == data.ClubMasterID).FirstOrDefault();
+                        if (clubMaster != null)
+                        {
+                            if (ClubImage != null)
+                            {
+                                clubMaster.ClubImage = Utilities.SaveImage(ClubImage, "~/Upload/Club/");
+                            }
+                            clubMaster.ClubName = data.ClubName;
+                            clubMaster.UpdatedDate = DateTime.Now;
+                            db.Entry(clubMaster).State = EntityState.Modified;
+                            db.SaveChanges();
+
+                        }
+
+                    }
+                    else
+                    {
+                        //Add HERE
+                        if (ClubImage != null)
+                        {
+                            data.ClubImage = Utilities.SaveImage(ClubImage, "~/Upload/Club/");
+                        }
+                        else
+                        {
+                            data.ClubImage = string.Empty;
+                        }
+                        data.CreatedDate = DateTime.Now;
+                        db.ClubMasters.Add(data);
+                        db.SaveChanges();
+                    }
+
+                }
+            }
+            catch (Exception e)
+            {
+                throw;
+            }
+            return RedirectToAction("ViewClub");
+        }
     }
 }
