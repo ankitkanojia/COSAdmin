@@ -105,5 +105,26 @@ namespace COSAdmin.Controllers
             }
             return RedirectToAction("ViewClub");
         }
+
+        public JsonResult DeleteClub(long ClubMasterID = 0)
+        {
+
+            ClubMaster clubMaster = new ClubMaster();
+            try
+            {
+                using (db = new DBEntities())
+                {
+                    clubMaster = db.ClubMasters.Where(s => s.ClubMasterID == ClubMasterID).FirstOrDefault();
+
+                    db.ClubMasters.Remove(clubMaster);
+                    db.SaveChanges();
+                    return Json(true, JsonRequestBehavior.AllowGet);
+                }
+            }
+            catch (Exception e)
+            {
+                return Json(false, JsonRequestBehavior.AllowGet);
+            }
+        }
     }
 }
