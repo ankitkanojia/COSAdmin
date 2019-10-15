@@ -137,6 +137,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\DashboardController.cs" />
+    <Compile Include="Controllers\DefaultController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -854,11 +855,13 @@
     <Content Include="Views\Home\ResetPassword.cshtml" />
     <Content Include="Views\Home\ViewEnquiry.cshtml" />
     <Content Include="Views\Dashboard\AdminDashboard.cshtml" />
+    <Content Include="Views\Dashboard\CoachDashboard.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Upload\Gallery\" />
     <Folder Include="Views\DashboardController\" />
+    <Folder Include="Views\Default\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

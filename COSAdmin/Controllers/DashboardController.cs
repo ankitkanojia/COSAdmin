@@ -15,5 +15,10 @@ namespace COSAdmin.Controllers
         {
             return View();
         }
+
+        public ActionResult CoachDashboard()
+        {
+            return View();
+        }
     }
 }
