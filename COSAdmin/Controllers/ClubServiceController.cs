@@ -14,6 +14,8 @@ namespace COSAdmin.Controllers
     {
         DBEntities db = new DBEntities();
 
+        #region --> Club
+
         public ActionResult ViewClub()
         {
             List<ClubMaster> clubMasters = new List<ClubMaster>();
@@ -126,5 +128,31 @@ namespace COSAdmin.Controllers
                 return Json(false, JsonRequestBehavior.AllowGet);
             }
         }
+
+        #endregion
+
+        #region --> AddGallary
+
+        public ActionResult ViewGallary()
+        {
+            List<ViewGallaryMasterVM> viewGallaryMasterVMs = new List<ViewGallaryMasterVM>();
+
+            try
+            {
+                using (db = new DBEntities())
+                {
+                    
+                }
+            }
+            catch (Exception e)
+            {
+                throw;
+            }
+
+
+            return View(viewGallaryMasterVMs);
+        }
+
+        #endregion
     }
 }
