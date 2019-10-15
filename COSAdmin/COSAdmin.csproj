@@ -207,6 +207,7 @@
     <Compile Include="Models\UserMaster.cs">
       <DependentUpon>DBModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\ViewModels\ClubServiceVM.cs" />
     <Compile Include="Models\ViewModels\HomeVM.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -859,6 +860,7 @@
     <Content Include="Views\ClubService\ViewClub.cshtml" />
     <Content Include="Views\ClubService\AddClub.cshtml" />
     <Content Include="Views\ClubService\ViewGallary.cshtml" />
+    <Content Include="Views\ClubService\AddGallery.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

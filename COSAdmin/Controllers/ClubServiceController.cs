@@ -160,6 +160,74 @@ namespace COSAdmin.Controllers
             return View(viewGallaryMasterVMs);
         }
 
+        [HttpGet]
+        public ActionResult AddGallery(long id = 0)
+        {
+            GallaryMaster gallaryMaster = new GallaryMaster();
+            try
+            {
+                if (id > 0)
+                {
+                    gallaryMaster = db.GallaryMasters.Where(s => s.GallaryMasterID == id).FirstOrDefault();
+                }
+
+            }
+            catch (Exception e)
+            {
+                throw;
+            }
+            return View(gallaryMaster);
+        }
+
+        [HttpPost]
+        public ActionResult AddGallery(GallaryMaster data, HttpPostedFileBase GallaryImg)
+        {
+            try
+            {
+                using (db = new DBEntities())
+                {
+                    if (data.GallaryMasterID > 0)
+                    {
+                        //Update
+                        GallaryMaster gallaryMaster = new GallaryMaster();
+                        gallaryMaster = db.GallaryMasters.Where(s => s.GallaryMasterID == data.GallaryMasterID).FirstOrDefault();
+                        if (gallaryMaster != null)
+                        {
+                            if (Profile != null)
+                            {
+                                gallaryMaster.Image = Utilities.SaveImage(GallaryImg, "~/Upload/Gallery/");
+
+                            }
+                            gallaryMaster.Image = data.Image;
+                            gallaryMaster.IsActive = data.IsActive;
+                            gallaryMaster.UpdatedDate = data.UpdatedDate;
+                            db.Entry(gallaryMaster).State = EntityState.Modified;
+                            db.SaveChanges();
+                        }
+                    }
+                    else
+                    {
+                        //Add
+                        GallaryMaster gallaryMaster = new GallaryMaster();
+                        gallaryMaster.Image = Utilities.SaveImage(GallaryImg, "~/Upload/Gallery/");
+                        gallaryMaster.GallaryMasterID = data.GallaryMasterID;
+                        gallaryMaster.ClubServiceID = data.ClubServiceID;
+                        gallaryMaster.CreatedDate = DateTime.Now;
+                        gallaryMaster.IsActive = data.IsActive;
+                        db.GallaryMasters.Add(gallaryMaster);
+                        db.SaveChanges();
+                    }
+                }
+
+            }
+            catch (Exception e)
+            {
+                throw;
+            }
+
+            return View();
+        }
+
         #endregion
     }
 }
