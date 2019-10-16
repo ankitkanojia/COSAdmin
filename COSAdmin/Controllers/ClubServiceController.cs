@@ -381,6 +381,39 @@ namespace COSAdmin.Controllers
             return View(viewClubServiceVMs);
         }
 
+        public ActionResult AddClubService()
+        {
+
+            return View((new ClubService()));
+        }
+
+        [HttpPost]
+        public ActionResult AddClubService(ClubService data)
+        {
+            try
+            {
+                using (db = new DBEntities())
+                {
+                    ClubService clubService = new ClubService();
+                    clubService.ServiceName = data.ServiceName;
+                    clubService.ServiceCategoryID = data.ServiceCategoryID;
+                    clubService.CreatedDate = DateTime.Now;
+                    clubService.ClubMasterID = data.ClubMasterID;
+                    clubService.IsActive = data.IsActive;
+                    clubService.IsPaid = data.IsPaid;
+                    db.ClubServices.Add(clubService);
+                    db.SaveChanges();
+                }
+
+            }
+            catch (Exception e)
+            {
+                throw;
+            }
+
+            return View();
+        }
+
         #endregion
     }
 }
