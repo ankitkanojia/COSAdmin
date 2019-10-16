@@ -249,5 +249,26 @@ namespace COSAdmin.Controllers
         }
 
         #endregion
+
+        #region --> Club Service
+
+        public ActionResult ViewServiceCategory()
+        {
+            List<ServiceCategory> serviceCategories = new List<ServiceCategory>();
+            try
+            {
+                using (db = new DBEntities())
+                {
+                    serviceCategories = db.ServiceCategories.ToList();
+                }
+            }
+            catch (Exception e)
+            {
+                throw;
+            }
+            return View(serviceCategories);
+        }
+
+        #endregion
     }
 }
