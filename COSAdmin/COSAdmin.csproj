@@ -866,6 +866,7 @@
     <Content Include="Views\ClubService\ViewClubService.cshtml" />
     <Content Include="Views\ClubService\AddClubService.cshtml" />
     <Content Include="Views\ClubService\ViewCoachSchedule.cshtml" />
+    <Content Include="Views\ClubService\AddCoachSchedule.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

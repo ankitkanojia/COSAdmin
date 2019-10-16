@@ -436,7 +436,7 @@ namespace COSAdmin.Controllers
 
         #endregion
 
-        #region --> CoachSchedule
+        #region --> Coach Schedule
 
         public ActionResult ViewCoachSchedule()
         {
@@ -465,6 +465,82 @@ namespace COSAdmin.Controllers
 
 
             return View(viewCoachScheduleVMs);
+        }
+
+        [HttpGet]
+        public ActionResult AddCoachSchedule(long id = 0)
+        {
+            CoachSchedule coachSchedule = new CoachSchedule();
+            try
+            {
+                using (db = new DBEntities())
+                {
+
+
+                    if (id > 0)
+                    {
+                        coachSchedule = db.CoachSchedules.Where(s => s.CoachScheduleID == id).FirstOrDefault();
+                    }
+                    else
+                    {
+                        long UserID = Convert.ToInt64(CookieHelper.GetCookie("UserID"));
+
+                        coachSchedule = db.CoachSchedules.Where(s => s.CoachMasterID == UserID).FirstOrDefault();
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                throw;
+            }
+            return View(coachSchedule);
+        }
+
+        [HttpPost]
+        public ActionResult AddCoachSchedule(CoachSchedule data)
+        {
+            try
+            {
+                using (db = new DBEntities())
+                {
+                    if (data.CoachScheduleID > 0)
+                    {
+                        //Update
+                        CoachSchedule coachSchedule = new CoachSchedule();
+                        coachSchedule = db.CoachSchedules.Where(s => s.CoachScheduleID == data.CoachScheduleID).FirstOrDefault();
+                        if (coachSchedule != null)
+                        {
+                            coachSchedule.StartTime = data.StartTime;
+                            coachSchedule.EndTime = data.EndTime;
+                            coachSchedule.IsActive = data.IsActive;
+                            coachSchedule.UpdatedDate = data.UpdatedDate;
+                            coachSchedule.CoachMasterID = Convert.ToInt64(CookieHelper.GetCookie("UserID"));
+                            db.Entry(coachSchedule).State = EntityState.Modified;
+                            db.SaveChanges();
+                        }
+
+                    }
+                    else
+                    {
+                        //Add
+                        CoachSchedule coachSchedule = new CoachSchedule();
+                        coachSchedule.StartTime = data.StartTime;
+                        coachSchedule.EndTime = data.EndTime;
+                        coachSchedule.IsActive = data.IsActive;
+                        coachSchedule.CoachMasterID = Convert.ToInt64(CookieHelper.GetCookie("UserID"));
+                        coachSchedule.CreatedDate = DateTime.Now;
+                        db.CoachSchedules.Add(coachSchedule);
+                        db.SaveChanges();
+                    }
+
+                }
+
+            }
+            catch (Exception e)
+            {
+                throw;
+            }
+            return View();
         }
 
         #endregion
