@@ -543,6 +543,25 @@ namespace COSAdmin.Controllers
             return View();
         }
 
+        public JsonResult deleteCoachSchedule(long CoachScheduleID = 0)
+        {
+            CoachSchedule coachSchedule = new CoachSchedule();
+            try
+            {
+                using (db = new DBEntities())
+                {
+                    coachSchedule = db.CoachSchedules.Where(s => s.CoachScheduleID == CoachScheduleID).FirstOrDefault();
+                    db.CoachSchedules.Remove(coachSchedule);
+                    db.SaveChanges();
+                    return Json(true, JsonRequestBehavior.AllowGet);
+                }
+            }
+            catch (Exception e)
+            {
+                return Json(false, JsonRequestBehavior.AllowGet);
+            }
+        }
+
         #endregion
     }
 }
