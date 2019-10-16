@@ -414,6 +414,26 @@ namespace COSAdmin.Controllers
             return View();
         }
 
+        public JsonResult deleteClubService(long ClubServiceID = 0)
+        {
+            ClubService clubService = new ClubService();
+            try
+            {
+                using (db = new DBEntities())
+                {
+                    clubService = db.ClubServices.Where(s => s.ClubServiceID == ClubServiceID).FirstOrDefault();
+                    db.ClubServices.Remove(clubService);
+                    db.SaveChanges();
+                    return Json(true, JsonRequestBehavior.AllowGet);
+                }
+
+            }
+            catch (Exception e)
+            {
+                return Json(false, JsonRequestBehavior.AllowGet);
+            }
+        }
+
         #endregion
     }
 }
