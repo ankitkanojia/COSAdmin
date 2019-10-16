@@ -250,7 +250,7 @@ namespace COSAdmin.Controllers
 
         #endregion
 
-        #region --> Club Service
+        #region --> Club Service Category
 
         public ActionResult ViewServiceCategory()
         {
@@ -346,6 +346,39 @@ namespace COSAdmin.Controllers
             {
                 return Json(false, JsonRequestBehavior.AllowGet);
             }
+        }
+
+        #endregion
+
+        #region --> Club Services
+
+        public ActionResult ViewClubService()
+        {
+            List<ViewClubServiceVM> viewClubServiceVMs = new List<ViewClubServiceVM>();
+
+            try
+            {
+                using (db = new DBEntities())
+                {
+                    viewClubServiceVMs = db.ClubServices.Select(s => new ViewClubServiceVM
+                    {
+                        ClubServiceID = s.ClubServiceID,
+                        CategoryType = db.ServiceCategories.Find(s.ClubServiceID).CategoryType,
+                        ServiceName = s.ServiceName,
+                        CreatedDate = s.CreatedDate,
+                        IsActive = s.IsActive,
+                        IsPaid = s.IsPaid
+
+                    }).ToList();
+                }
+            }
+            catch (Exception e)
+            {
+                throw;
+            }
+
+
+            return View(viewClubServiceVMs);
         }
 
         #endregion
