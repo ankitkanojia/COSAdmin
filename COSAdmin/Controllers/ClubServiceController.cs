@@ -269,6 +269,64 @@ namespace COSAdmin.Controllers
             return View(serviceCategories);
         }
 
+        public ActionResult AddServiceCategory(long id = 0)
+        {
+            ServiceCategory serviceCategory = new ServiceCategory();
+            try
+            {
+                using (db = new DBEntities())
+                {
+                    if (id > 0)
+                    {
+                        serviceCategory = db.ServiceCategories.Where(s => s.ServiceCategoryID == id).FirstOrDefault();
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                throw;
+            }
+            return View(serviceCategory);
+        }
+
+        [HttpPost]
+        public ActionResult AddServiceCategory(ServiceCategory data)
+        {
+            ServiceCategory serviceCategory = new ServiceCategory();
+
+            try
+            {
+                using (db = new DBEntities())
+                {
+                    if (data.ServiceCategoryID > 0)
+                    {
+                        //Update HERE
+                        serviceCategory = db.ServiceCategories.Where(s => s.ServiceCategoryID == data.ServiceCategoryID).FirstOrDefault();
+                        serviceCategory.CategoryType = data.CategoryType;
+                        serviceCategory.IsActive = data.IsActive;
+                        db.Entry(serviceCategory).State = EntityState.Modified;
+                        db.SaveChanges();
+
+                    }
+                    else
+                    {
+                        //Add HERE
+                        serviceCategory.CategoryType = data.CategoryType;
+                        serviceCategory.CreatedDate = DateTime.Now;
+                        serviceCategory.IsActive = data.IsActive;
+                        db.ServiceCategories.Add(serviceCategory);
+                        db.SaveChanges();
+                    }
+
+                }
+            }
+            catch (Exception e)
+            {
+                throw;
+            }
+            return View();
+        }
+
         #endregion
     }
 }

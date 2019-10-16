@@ -1,0 +1,103 @@
+﻿@model ServiceCategory
+@{
+    ViewBag.Title = "Add Service Category";
+}
+
+<div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-lg-10">
+        <h2>Add Service Category</h2>
+        <ol class="breadcrumb">
+            <li>
+                <a href="@Url.Action("Index", "Dashboard")">Home</a>
+            </li>
+            <li class="active">
+                <strong>Add Service Category</strong>
+            </li>
+        </ol>
+    </div>
+    <div class="col-lg-2">
+
+    </div>
+</div>
+
+
+<div class="wrapper wrapper-content animated fadeInRight">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <div class="ibox-tools">
+                        <a class="collapse-link">
+                            <i class="fa fa-chevron-up"></i>
+                        </a>
+                    </div>
+                </div>
+                @using (Html.BeginForm("AddServiceCategory", "ClubService", FormMethod.Post))
+                {
+                    @Html.HiddenFor(s => s.ServiceCategoryID)
+                    <div class="ibox-content">
+                        @*START: CONTENT HERE*@
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Category Name <span class="text-danger">*</span> </label>
+                                    @Html.TextBoxFor(s => s.CategoryType, new { @class = "form-control", @placeholder = "Enter category name" })
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-2">
+                                <div class="form-group">
+                                    <label> IsActive <span class="text-danger">*</span> </label>
+                                    @Html.CheckBoxFor(s => s.IsActive, new { @class = "form-control" })
+                                </div>
+                            </div>
+                        </div>
+
+
+
+                        <hr />
+                        <div class="row">
+                            <div class="col-md-6">
+                                <button type="submit" class=" btn btn-success">Submit</button>
+                                <button type="button" class=" btn btn-default">Cancle</button>
+                            </div>
+                        </div>
+                        @*END: CONTENT HERE*@
+                    </div>
+                }
+
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Styles {
+    @Styles.Render("~/Content/plugins/iCheck/iCheckStyles")
+    @Styles.Render("~/plugins/dataPickerStyles")
+}
+
+@section Scripts {
+    @Scripts.Render("~/plugins/iCheck")
+    @Scripts.Render("~/plugins/dataPicker")
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+
+            $('#data_1 .input-group.date').datepicker({
+                todayBtn: "linked",
+                keyboardNavigation: false,
+                forceParse: false,
+                calendarWeeks: true,
+                autoclose: true
+            });
+
+            $('.i-checks').iCheck({
+                checkboxClass: 'icheckbox_square-green',
+                radioClass: 'iradio_square-green',
+            });
+
+        });
+    </script>
+}
