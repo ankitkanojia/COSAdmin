@@ -435,5 +435,38 @@ namespace COSAdmin.Controllers
         }
 
         #endregion
+
+        #region --> CoachSchedule
+
+        public ActionResult ViewCoachSchedule()
+        {
+            List<ViewCoachScheduleVM> viewCoachScheduleVMs = new List<ViewCoachScheduleVM>();
+
+            try
+            {
+                using (db = new DBEntities())
+                {
+                    viewCoachScheduleVMs = db.CoachSchedules.Select(s => new ViewCoachScheduleVM
+                    {
+                        CreatedDate = s.CreatedDate,
+                        EndTime = s.EndTime,
+                        FirstName = db.CoachMasters.Find(s.CoachMasterID).FirstName,
+                        IsActive = s.IsActive,
+                        LastName = db.CoachMasters.Find(s.CoachMasterID).LastName,
+                        StartTime = s.StartTime,
+                        CoachScheduleID = s.CoachScheduleID
+                    }).ToList();
+                }
+            }
+            catch (Exception e)
+            {
+                throw;
+            }
+
+
+            return View(viewCoachScheduleVMs);
+        }
+
+        #endregion
     }
 }

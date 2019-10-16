@@ -23,4 +23,15 @@ namespace COSAdmin.Models.ViewModels
         public bool IsPaid { get; set; }
         public long ClubServiceID { get; set; }
     }
+
+    public class ViewCoachScheduleVM
+    {
+        public TimeSpan StartTime { get; set; }
+        public TimeSpan EndTime { get; set; }
+        public bool IsActive { get; set; }
+        public System.DateTime CreatedDate { get; set; }
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
+        public long CoachScheduleID { get; set; }
+    }
 }
