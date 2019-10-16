@@ -327,6 +327,27 @@ namespace COSAdmin.Controllers
             return View();
         }
 
+        public JsonResult DeleteServiceCategory(long ServiceCategoryID = 0)
+        {
+
+            ServiceCategory serviceCategory = new ServiceCategory();
+            try
+            {
+                using (db = new DBEntities())
+                {
+                    serviceCategory = db.ServiceCategories.Where(s => s.ServiceCategoryID == ServiceCategoryID).FirstOrDefault();
+
+                    db.ServiceCategories.Remove(serviceCategory);
+                    db.SaveChanges();
+                    return Json(true, JsonRequestBehavior.AllowGet);
+                }
+            }
+            catch (Exception e)
+            {
+                return Json(false, JsonRequestBehavior.AllowGet);
+            }
+        }
+
         #endregion
     }
 }
