@@ -136,6 +136,7 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Areas\UserPanel\UserPanelAreaRegistration.cs" />
     <Compile Include="Controllers\DashboardController.cs" />
     <Compile Include="Controllers\ClubServiceController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -374,6 +375,7 @@
     <Content Include="Models\DBModel.edmx.diagram">
       <DependentUpon>DBModel.edmx</DependentUpon>
     </Content>
+    <Content Include="Areas\UserPanel\Views\web.config" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
@@ -870,6 +872,9 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Areas\UserPanel\Controllers\" />
+    <Folder Include="Areas\UserPanel\Models\" />
+    <Folder Include="Areas\UserPanel\Views\Shared\" />
     <Folder Include="Upload\Gallery\" />
     <Folder Include="Views\DashboardController\" />
     <Folder Include="Views\Default\" />
