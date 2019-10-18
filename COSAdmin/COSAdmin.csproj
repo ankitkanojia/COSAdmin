@@ -574,6 +574,7 @@
     <Content Include="Areas\UserPanel\Views\HomeUser\Index.cshtml" />
     <Content Include="Areas\UserPanel\Views\HomeUser\Login.cshtml" />
     <Content Include="Areas\UserPanel\Views\HomeUser\Registration.cshtml" />
+    <Content Include="Areas\UserPanel\Views\HomeUser\Payment.cshtml" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
