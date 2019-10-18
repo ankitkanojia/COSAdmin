@@ -1,0 +1,87 @@
+﻿@model UserMaster
+
+
+@{
+    ViewBag.Title = "Registration";
+    Layout = "~/Areas/UserPanel/Views/Shared/_Layout.cshtml";
+}
+
+<!-- CONTENT + SIDEBAR -->
+<div class="main-wrapper clearfix">
+    <div class="site-pagetitle jumbotron">
+        <div class="container text-center">
+            <h3>Registration to Club Organisation System</h3>
+
+        </div>
+    </div>
+    <div class="container theme-container">
+        <main id="main-content" class="main-container" itemprop="mainContentOfPage" itemscope="itemscope">
+            <article itemscope="itemscope" itemprop="blogPost">
+                <!-- Main Content of the Post -->
+                <div class="entry-content" itemprop="articleBody">
+                    <div class="woocommerce checkout">
+                        @using (Html.BeginForm("Registration", "HomeUser", FormMethod.Post, new { @id = "frmLogin" }))
+                        {
+                            <div class="col2-set clearfix" id="customer_details">
+                                <div class="col-1 col-lg-6 col-sm-6 border">
+                                    <h4 class="cart-title-highlight title-3">Enter your credentials</h4>
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <label style="font-size:14px;">Enter your mobile number</label>
+                                                @Html.TextBoxFor(s => s.Mobile, new { @class = "form-control", placeholder = "99XXXXXXXX" })
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <label style="font-size:14px;">Enter your password</label>
+                                                @Html.PasswordFor(s => s.Password, new { @class = "form-control", placeholder = "XXXXXX" })
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <label style="font-size:14px;">Enter your full name</label>
+                                                @Html.TextBoxFor(s => s.Name, new { @class = "form-control", placeholder = "Joe Smith" })
+                                            </div>
+                                        </div>
+
+
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <label style="font-size:14px;">Enter your email address</label>
+                                                @Html.TextBoxFor(s => s.Email, new { @class = "form-control", placeholder = "abc@xyz.com" })
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <label style="font-size:14px;">Enter your address</label>
+                                                @Html.TextAreaFor(s => s.Address, new { @class = "form-control", placeholder = "Enter your address" })
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-6">
+                                            <label class="label label-danger"> You must pay RS.350 registration fees </label>
+                                        </div>
+
+                                        <div class="col-md-6">
+                                            <button type="submit" class="btn btn-warning"> Registration </button>
+                                        </div>
+
+                                    </div>
+                                </div>
+
+                            </div>
+
+                        }
+
+                        <br /><br />
+                    </div>
+                </div>
+            </article>
+        </main>
+    </div>
+
+
+</div>

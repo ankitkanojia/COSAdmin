@@ -104,5 +104,33 @@ namespace COSAdmin.Areas.UserPanel.Controllers
             // Write the authentication cookie
             FormsAuthentication.SetAuthCookie(userName, isPersistent);
         }
+
+        public ActionResult Registration()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult Registration(UserMaster data)
+        {
+            try
+            {
+                using (db = new DBEntities())
+                {
+                    data.DOB = DateTime.Now;
+                    data.IsActive = true;
+                    data.CreatedDate = DateTime.Now;
+                    data.RoleID = 3;
+                    db.UserMasters.Add(data);
+                    db.SaveChanges();
+
+                    return RedirectToAction("Payment", "HomeUser", new { id = data.UserMasterID });
+                }
+            }
+            catch
+            {
+                throw;
+            }
+        }
     }
 }
