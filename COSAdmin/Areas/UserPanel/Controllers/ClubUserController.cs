@@ -65,6 +65,11 @@ namespace COSAdmin.Areas.UserPanel.Controllers
         }
 
 
+        public ActionResult ClubService(long id = 0)
+        {
+            return View();
+        }
+
         [HttpPost]
         public ActionResult ClubService(CluubServicesVM data)
         {
