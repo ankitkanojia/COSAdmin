@@ -1,0 +1,149 @@
+﻿@model CluubServicesVM
+
+
+@{
+    ViewBag.Title = "Registration";
+    Layout = "~/Areas/UserPanel/Views/Shared/_Layout.cshtml";
+}
+
+<!-- CONTENT + SIDEBAR -->
+<div class="main-wrapper clearfix">
+    <div class="site-pagetitle jumbotron">
+        <div class="container text-center">
+            <h3>Select our club services</h3>
+        </div>
+    </div>
+    <div class="container theme-container">
+        <main id="main-content" class="main-container" itemprop="mainContentOfPage" itemscope="itemscope">
+            <article itemscope="itemscope" itemprop="blogPost">
+                <!-- Main Content of the Post -->
+                <div class="entry-content" itemprop="articleBody">
+                    <div class="woocommerce checkout">
+                        @using (Html.BeginForm("Registration", "HomeUser", FormMethod.Post, new { @id = "frmLogin" }))
+                        {
+                            <div class="col2-set clearfix" id="customer_details">
+                                <div class="col-1 col-lg-6 col-sm-6 border">
+                                    <h4 class="cart-title-highlight title-3">Select our club services</h4>
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <label style="font-size:14px;">Select Category</label>
+                                                @Html.DropDownListFor(s => s.ServiceCategoryID, COSAdmin.Helpers.Utilities.GetServiceCategoryList(), new { @class = "form-control" })
+                                            </div>
+                                        </div>
+
+
+
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <label style="font-size:14px;">Coach Trainee Charges</label>
+                                                @Html.TextBoxFor(s => s.TraineeCharge, new { @class = "form-control", @readonly = "readonly" })
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <label style="font-size:14px;">Select Club Services</label>
+                                                <select class="form-control" id="ClubServiceID" name="ClubServiceID">
+                                                    <option>Select Services</option>
+                                                </select>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <label style="font-size:14px;">Select Coach</label>
+                                                <select class="form-control" id="CouchMasterID" name="CouchMasterID">
+                                                    <option>Select Coach</option>
+                                                </select>
+                                                @*@Html.DropDownListFor(s => s.CouchMasterID, COSAdmin.Helpers.Utilities.GetCouchList(), new { @class = "form-control" })*@
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-6">
+                                            <button type="submit" class="btn btn-warning"> Go for PAYMENT </button>
+                                        </div>
+
+                                    </div>
+                                </div>
+
+                            </div>
+
+                        }
+
+                        <br /><br />
+                    </div>
+                </div>
+            </article>
+        </main>
+    </div>
+
+
+</div>
+<script src="~/Scripts/jquery-2.1.1.min.js"></script>
+
+<script>
+    $(document).ready(function () {
+
+        $("#CouchMasterID").change(function () {
+
+            $.ajax({
+                type: "GET",
+                dataType: "json",
+                url: '@Url.Action("GetTraineeCharges", "ClubUser")',
+                data: { CouchMasterID: $('#CouchMasterID').val() },
+                success: function (data) {
+                    $('#TraineeCharge').val(data.charges);
+                },
+                error: function () { alert('Unexpected Error Occur'); }
+            });
+
+        });
+
+
+
+        $("#ServiceCategoryID").change(function () {
+
+            $.ajax({
+                type: "GET",
+                dataType: "json",
+                url: '@Url.Action("GetClubServices", "ClubUser")',
+                data: { ServiceCategoryID: $('#ServiceCategoryID').val() },
+                success: function (data) {
+                    var items = '<option>Select club services</option>';
+                    $.each(data, function (i, city) {
+                        items += "<option value='" + city.Value + "'>" + city.Text + "</option>";
+                    });
+                    $('#ClubServiceID').html(items);
+                },
+                error: function () { alert('Unexpected Error Occur'); }
+            });
+
+        });
+
+
+
+        $("#ClubServiceID").change(function () {
+
+            $.ajax({
+                type: "GET",
+                dataType: "json",
+                url: '@Url.Action("GetClubServices", "ClubUser")',
+                data: { ClubServiceID: $('#ClubServiceID').val() },
+                success: function (data) {
+                    var items = '<option>Select club services</option>';
+                    $.each(data, function (i, city) {
+                        items += "<option value='" + city.Value + "'>" + city.Text + "</option>";
+                    });
+                    $('#CouchMasterID').html(items);
+                },
+                error: function () { alert('Unexpected Error Occur'); }
+            });
+
+        });
+
+
+
+
+    });
+</script>
