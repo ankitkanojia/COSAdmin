@@ -136,6 +136,7 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Areas\UserPanel\Controllers\ClubUserController.cs" />
     <Compile Include="Areas\UserPanel\Controllers\HomeUserController.cs" />
     <Compile Include="Areas\UserPanel\UserPanelAreaRegistration.cs" />
     <Compile Include="Controllers\DashboardController.cs" />
@@ -575,6 +576,7 @@
     <Content Include="Areas\UserPanel\Views\HomeUser\Login.cshtml" />
     <Content Include="Areas\UserPanel\Views\HomeUser\Registration.cshtml" />
     <Content Include="Areas\UserPanel\Views\HomeUser\Payment.cshtml" />
+    <Content Include="Areas\UserPanel\Views\ClubUser\SelectClub.cshtml" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />

@@ -1,0 +1,45 @@
+﻿@model List<ClubMaster>
+
+
+@{
+    ViewBag.Title = "SelectClub";
+    Layout = "~/Areas/UserPanel/Views/Shared/_Layout.cshtml";
+    string path = "/Upload/Club/";
+}
+
+<div class="site-pagetitle jumbotron">
+    <div class="container text-center">
+        <h3>Select Club</h3>
+    </div>
+</div>
+
+<section class="banner clear">
+    <div class="container theme-container">
+        <div class="row">
+            @foreach (var item in Model)
+            {
+                <div class="col-lg-4 col-md-4 col-sm-6 promo-wrap">
+                    <div class="gst-promo-2 text-center">
+                        <h3 class="funky-font fsz-35">@item.ClubName</h3>
+                        <img src="@path@item.ClubImage" alt="" />
+                        <div class="vertical-align-div gst-promo-text col-sm-12">
+
+                            <div>
+                                <div class="vertical-align-text wht-clr">
+                                    @*<h2 class="funky-font fsz-70"> @item.ClubName </h2>*@
+                                    <a href="@Url.Action("ClubService", "ClubUser", new { id = item.ClubMasterID})" class="fancy-btn fancy-btn-small">Go for service</a>
+                                </div>
+                            </div>
+                        </div>
+                        <hr />
+                        <p>Description: @item.Description</p>
+                    </div>
+                </div>
+            }
+
+        </div>
+    </div>
+</section>
+
+<br />
+<br />
