@@ -149,6 +149,7 @@
     <Compile Include="Helpers\CookieHelper.cs" />
     <Compile Include="Helpers\EmailAndSMS.cs" />
     <Compile Include="Helpers\Hashing.cs" />
+    <Compile Include="Helpers\RemotePost.cs" />
     <Compile Include="Helpers\Utilities.cs" />
     <Compile Include="Models\CityMaster.cs">
       <DependentUpon>DBModel.tt</DependentUpon>
