@@ -1,7 +1,7 @@
 *.html linguist-language=html
 *.java linguist-detectable=false
 *.htm linguist-detectable=false
-*.html linguist-detectable=false
+*.html linguist-detectable=true
 *.xml linguist-detectable=false
 *.css linguist-detectable=false
 *.cs linguist-detectable=true
